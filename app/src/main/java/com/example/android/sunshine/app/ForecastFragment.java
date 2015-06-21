@@ -224,11 +224,11 @@ public class ForecastFragment extends Fragment {
         private String formatHighLows(double high, double low) {
             // Data fetched in metric by default.  If imperial units set in preference, convert here
             SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
-            String unitType = sharedPrefs.getString(getString(R.string.pref_unit_key), getString(R.string.pref_unit_metric));
-            if (unitType.equals(getString(R.string.pref_unit_imperial))) {
+            String unitType = sharedPrefs.getString(getString(R.string.pref_units_key), getString(R.string.pref_units_metric));
+            if (unitType.equals(getString(R.string.pref_units_imperial))) {
                 high = (high * 1.8) + 32;
                 low = (low * 1.8) + 32;
-            }else if (!unitType.equals(getString(R.string.pref_unit_metric))) {
+            }else if (!unitType.equals(getString(R.string.pref_units_metric))) {
                 Log.d(LOG_TAG, "Unit type not found: " + unitType);
             }
             long roundedHigh = Math.round(high);
