@@ -61,12 +61,21 @@ public class ForecastFragment extends Fragment implements LoaderManager.LoaderCa
     private ForecastAdapter mForecastAdapter;
     private ListView mListView;
     private int mScrollPosition = 0;
+    private boolean mUseTodayLayout;
 
     public interface Callback {
         public void onItemSelected(Uri dateUri);
     }
 
     public ForecastFragment() {
+    }
+
+    public void setUseTodayLayout(boolean useTodayLayout) {
+        mUseTodayLayout = useTodayLayout;
+        if (mForecastAdapter != null) {
+            mForecastAdapter.setUseTodayLayout(mUseTodayLayout);
+        }
+
     }
 
     @Override
@@ -80,6 +89,10 @@ public class ForecastFragment extends Fragment implements LoaderManager.LoaderCa
                              Bundle savedInstanceState) {
 
         mForecastAdapter = new ForecastAdapter(getActivity(), null, 0);
+
+        //Set boolean here when adapte ris created
+        mForecastAdapter.setUseTodayLayout(mUseTodayLayout);
+
         View rootView = inflater.inflate(R.layout.fragment_main, container, false);
         mListView = (ListView) rootView.findViewById(R.id.listview_forecast);
         mListView.setAdapter(mForecastAdapter);
